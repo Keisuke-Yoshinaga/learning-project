@@ -27,7 +27,7 @@ services:
     tty: true
     # restart: on-failure
     working_dir: /app
-    command: yarn dev
+    command: yarn dev # 本番で動かす際はコメントアウト
 
   server:
     build:
