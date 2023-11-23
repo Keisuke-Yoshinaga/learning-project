@@ -20,6 +20,7 @@ const dialogStore = useDialogStore();
         <v-col class="flex items-center">
           <input v-model="task.title" class="w-full focus:outline-none" :class="{ 'line-through': task.checked }" :disabled="task.checked" @input="taskListStore.editTask(task.id, task.title)" />
         </v-col>
+        <!-- TODO 期日の表示 -->
         <v-col cols="3" class="flex items-center d-flex justify-end">
           <v-btn color="primary" density="compact" icon="mdi-pencil" @click="dialogStore.openDialog(task.id)">
           </v-btn>

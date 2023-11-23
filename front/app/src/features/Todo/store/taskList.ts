@@ -105,10 +105,13 @@ export const useTaskListStore = defineStore("taskList", {
       this.taskList[index].checked = !this.taskList[index].checked;
     },
     deleteTask(id: string) {
-      this.taskList.splice(
-        this.taskList.findIndex((task) => task.id === id),
-        1,
-      );
+      const index = this.taskList.findIndex((task) => task.id === id);
+      this.taskList.splice(index, 1);
+      // 削除時にサブタスクも削除する
+      const subTaskList = this.getSubTaskList(id);
+      subTaskList.forEach((subTask) => {
+        this.deleteTask(subTask.id);
+      });
     },
   },
 });
