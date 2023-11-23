@@ -8,22 +8,30 @@
 $ docker-compose up -d --build
 ```
 
-2. 開発環境起動
+## 開発環境 (フロントエンド)
+
+1. 開発環境の起動
 
 ```
 $ docker-compose exec front yarn dev
 ```
 
-3. http://localhost:3000 にアクセス(vite の開発環境へのアクセス)
+2. http://localhost:3000 にアクセス(vite の開発環境へのアクセス)
 
-4. フロント側のビルド
+## 開発環境 (バックエンド)
+
+1. http://localhost:5001/docs にアクセス(fastAPI docs へのアクセス)
+
+## 本番環境
+
+1. フロント側のビルド
 
 ```
 docker-compose exec front yarn build
 ```
 
-5. http://localhost:8000 にアクセス(NGINX による本番環境へのアクセス)
+2. http://localhost:8000 にアクセス(NGINX による本番環境へのアクセス)
 
-### template
+## template
 
 https://github.com/gaitou2048/fastAPI-veutify-template

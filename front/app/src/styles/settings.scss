@@ -5,10 +5,11 @@
  */
 
 // https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+@use "vuetify/settings" with (
+  // $color-pack: false
+  $reset: true
+);
 
-// @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
