@@ -6,7 +6,7 @@ export type Task = {
   dueDate: Date | null;
   color: string;
   checked: boolean;
-  mainTaskId: string | null;
+  parentTaskId: string;
   registerDate: Date;
   updateDate: Date;
 };

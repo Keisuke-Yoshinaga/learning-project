@@ -12,7 +12,7 @@ export const useTaskListStore = defineStore("taskList", {
         dueDate: null,
         color: "red",
         checked: false,
-        mainTaskId: null,
+        parentTaskId: "",
         registerDate: new Date(),
         updateDate: new Date(),
       },
@@ -23,7 +23,7 @@ export const useTaskListStore = defineStore("taskList", {
         dueDate: null,
         color: "blue",
         checked: false,
-        mainTaskId: null,
+        parentTaskId: "",
         registerDate: new Date(),
         updateDate: new Date(),
       },
@@ -34,7 +34,7 @@ export const useTaskListStore = defineStore("taskList", {
         dueDate: null,
         color: "green",
         checked: false,
-        mainTaskId: null,
+        parentTaskId: "",
         registerDate: new Date(),
         updateDate: new Date(),
       },
@@ -45,7 +45,7 @@ export const useTaskListStore = defineStore("taskList", {
         dueDate: null,
         color: "yellow",
         checked: false,
-        mainTaskId: "1",
+        parentTaskId: "1",
         registerDate: new Date(),
         updateDate: new Date(),
       },
@@ -56,7 +56,7 @@ export const useTaskListStore = defineStore("taskList", {
         dueDate: null,
         color: "purple",
         checked: false,
-        mainTaskId: "4",
+        parentTaskId: "4",
         registerDate: new Date(),
         updateDate: new Date(),
       },
@@ -73,11 +73,11 @@ export const useTaskListStore = defineStore("taskList", {
     },
     // メインタスクを取得
     getMainTaskList(state) {
-      return state.taskList.filter((task) => task.mainTaskId === null);
+      return state.taskList.filter((task) => task.parentTaskId === "");
     },
     // サブタスクを取得
     getSubTaskList: (state) => (id: string) => {
-      return state.taskList.filter((task) => task.mainTaskId === id);
+      return state.taskList.filter((task) => task.parentTaskId === id);
     },
     getTaskListLength(state) {
       return state.taskList.length;
@@ -99,7 +99,26 @@ export const useTaskListStore = defineStore("taskList", {
         dueDate: null,
         color: "white",
         checked: false,
-        mainTaskId: null,
+        parentTaskId: "",
+        registerDate: new Date(),
+        updateDate: new Date(),
+      });
+    },
+    addDetailTask(
+      title: string,
+      memo: string,
+      dueDate: Date | null,
+      color: string,
+      parentTaskId: string,
+    ) {
+      this.taskList.push({
+        id: uuidv4(),
+        title: title.trim(),
+        memo: memo.trim(),
+        dueDate: dueDate,
+        color: color,
+        checked: false,
+        parentTaskId: parentTaskId,
         registerDate: new Date(),
         updateDate: new Date(),
       });

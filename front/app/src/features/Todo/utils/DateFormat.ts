@@ -20,3 +20,12 @@ export const getTomorrow = () => {
   tomorrow.setHours(0, 0, 0, 0);
   return tomorrow;
 };
+
+// 現在時刻と比較して過去の日付かどうかを判定
+export const isPastDueDate = (dueDate: Date | null) => {
+  if (!dueDate) {
+    return false;
+  }
+  const today = new Date();
+  return dueDate < today;
+};
