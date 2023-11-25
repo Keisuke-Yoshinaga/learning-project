@@ -1,24 +1,25 @@
 <script lang="ts" setup>
 import { useTaskListStore } from '../store/taskList'
-import { useDialogStore } from '../store/dialog';
+import { useEditTaskDialogStore } from '../store/editTaskDialog';
 import ShowSubTaskList from './ShowSubTaskList.vue';
 import ShowEditTaskDialog from './ShowEditTaskDialog.vue';
+import { getColor } from '../utils/Colors';
 
 const taskListStore = useTaskListStore();
-const dialogStore = useDialogStore();
+const dialogStore = useEditTaskDialogStore();
 
 </script>
 
 <template>
   <!-- TODO フィルター機能 -->
   <v-list v-if="taskListStore.getMainTaskList.length" lines="one" class="space-y-3 bg-inherit">
-    <v-list-item v-for="task in  taskListStore.getMainTaskList " :key="task.id" class="rounded-md border-l-8 bg-white shadow-md px-2" :style="{ borderColor: task.color }">
+    <v-list-item v-for="task in  taskListStore.getMainTaskList " :key="task.id" class="rounded-md border-l-8 bg-white shadow-md px-2" :style="{ borderColor: getColor(task.color) }">
       <v-row justify="space-between" class="">
         <v-col cols="1" class="items-center">
           <v-checkbox-btn v-model="task.checked" color="success" @checked="taskListStore.checkTask(task.id)"></v-checkbox-btn>
         </v-col>
         <v-col class="flex items-center">
-          <input v-model="task.title" class="w-full focus:outline-none" :class="{ 'line-through': task.checked }" :disabled="task.checked" @input="taskListStore.editTask(task.id, task.title)" />
+          <input v-model="task.title" class="w-full focus:outline-none" :class="{ 'line-through': task.checked }" :disabled="task.checked" readonly />
         </v-col>
         <!-- TODO 期日の表示 -->
         <v-col cols="3" class="flex items-center d-flex justify-end">

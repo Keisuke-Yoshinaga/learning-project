@@ -63,12 +63,19 @@ export const useTaskListStore = defineStore("taskList", {
     ],
   }),
   getters: {
+    // タスクリストを取得
     getTaskList(state) {
       return state.taskList;
     },
+    // タスクを取得
+    getTask: (state) => (id: string) => {
+      return state.taskList.find((task) => task.id === id);
+    },
+    // メインタスクを取得
     getMainTaskList(state) {
       return state.taskList.filter((task) => task.mainTaskId === null);
     },
+    // サブタスクを取得
     getSubTaskList: (state) => (id: string) => {
       return state.taskList.filter((task) => task.mainTaskId === id);
     },
@@ -83,27 +90,41 @@ export const useTaskListStore = defineStore("taskList", {
     },
   },
   actions: {
+    // タスクを追加
     addTask(inputValue: string) {
       this.taskList.push({
         id: uuidv4(),
-        title: inputValue,
+        title: inputValue.trim(),
         memo: "",
         dueDate: null,
-        color: "gray",
+        color: "white",
         checked: false,
         mainTaskId: null,
         registerDate: new Date(),
         updateDate: new Date(),
       });
     },
-    editTask(id: string, inputValue: string) {
+    // タスクを編集
+    editTask(
+      id: string,
+      title: string,
+      memo: string,
+      dueDate: Date | null,
+      color: string,
+    ) {
       const index = this.taskList.findIndex((task) => task.id === id);
-      this.taskList[index].title = inputValue;
+      this.taskList[index].title = title.trim();
+      this.taskList[index].memo = memo.trim();
+      this.taskList[index].dueDate = dueDate;
+      this.taskList[index].color = color;
+      this.taskList[index].updateDate = new Date();
     },
+    // タスクをチェック
     checkTask(id: string) {
       const index = this.taskList.findIndex((task) => task.id === id);
       this.taskList[index].checked = !this.taskList[index].checked;
     },
+    // タスクを削除
     deleteTask(id: string) {
       const index = this.taskList.findIndex((task) => task.id === id);
       this.taskList.splice(index, 1);

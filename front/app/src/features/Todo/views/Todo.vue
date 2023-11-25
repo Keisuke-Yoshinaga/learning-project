@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
 import InputTask from '../components/InputTask.vue'
 import ShowTaskList from '../components/ShowTaskList.vue'
 import ShowTaskListStats from '../components/ShowTaskListStats.vue'
 
-const dialog = ref(false);
 </script>
 
 

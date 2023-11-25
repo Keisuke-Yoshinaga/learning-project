@@ -9,6 +9,7 @@ const errorMessage: Ref<string> = ref("");
 
 const taskListStore = useTaskListStore();
 
+// 必須入力チェック
 const requiredValidation = (): boolean => {
   if (!inputTask.value) {
     if (!inputTask.value.trim()) {
