@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { TaskList } from "../types/TaskList";
 import { v4 as uuidv4 } from "uuid";
+import { colors } from "../utils/Colors";
 
 export const useTaskListStore = defineStore("taskList", {
   state: (): TaskList => ({
@@ -63,7 +64,7 @@ export const useTaskListStore = defineStore("taskList", {
     ],
   }),
   getters: {
-    // タスクリストを取得
+    // 全タスクリストを取得
     getTaskList(state) {
       return state.taskList;
     },
@@ -79,14 +80,53 @@ export const useTaskListStore = defineStore("taskList", {
     getSubTaskList: (state) => (id: string) => {
       return state.taskList.filter((task) => task.parentTaskId === id);
     },
-    getTaskListLength(state) {
-      return state.taskList.length;
+    // フィルター
+    getFilterTaskList: (state) => (filters: string[]) => {
+      if (filters.length === 0) {
+        return state.taskList.filter((task) => task.parentTaskId === "");
+      } else {
+        const colorFilter = filters.map((filter) => {
+          return colors[Number(filter)].name;
+        });
+        return state.taskList.filter((task) =>
+          colorFilter.includes(task.color),
+        );
+      }
     },
-    getTaskListCheckedLength(state) {
-      return state.taskList.filter((task) => task.checked).length;
+    getTaskListLength: (state) => (filters: string[]) => {
+      if (filters.length === 0) {
+        return state.taskList.length;
+      } else {
+        const colorFilter = filters.map((filter) => {
+          return colors[Number(filter)].name;
+        });
+        return state.taskList.filter((task) => colorFilter.includes(task.color))
+          .length;
+      }
     },
-    getTaskListUncheckedLength(state) {
-      return state.taskList.filter((task) => !task.checked).length;
+    getTaskListCheckedLength: (state) => (filters: string[]) => {
+      if (filters.length === 0) {
+        return state.taskList.filter((task) => task.checked).length;
+      } else {
+        const colorFilter = filters.map((filter) => {
+          return colors[Number(filter)].name;
+        });
+        return state.taskList.filter(
+          (task) => colorFilter.includes(task.color) && task.checked,
+        ).length;
+      }
+    },
+    getTaskListUncheckedLength: (state) => (filters: string[]) => {
+      if (filters.length === 0) {
+        return state.taskList.filter((task) => !task.checked).length;
+      } else {
+        const colorFilter = filters.map((filter) => {
+          return colors[Number(filter)].name;
+        });
+        return state.taskList.filter(
+          (task) => colorFilter.includes(task.color) && !task.checked,
+        ).length;
+      }
     },
   },
   actions: {

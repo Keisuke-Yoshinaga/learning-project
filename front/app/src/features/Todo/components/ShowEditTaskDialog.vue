@@ -94,10 +94,12 @@ const saveTask = () => {
         <VueDatePicker v-model="dueDate" :teleport="true" locale="ja" :format=dateFormat time-picker-inline />
         <!-- ラベルカラーの追加 -->
         <div class="mt-6 mb-2">ラベルカラー</div>
-        <v-radio-group v-model="color" inline class="rounded">
-          <v-radio v-for="item in colors" :key="item.name" :label="item.name" :value="item.name" :color="item.name !== 'white' ? item.color : '#000000'" :ripple="false">
-          </v-radio>
-        </v-radio-group>
+        <v-chip-group v-model="color" column>
+          <v-chip v-for="color in colors" :key="color.name" :value="color.name" variant="outlined" label filter>
+            <v-icon start icon="mdi-circle" :color="color.color"></v-icon>
+            {{ color.name }}
+          </v-chip>
+        </v-chip-group>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

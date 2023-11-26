@@ -47,3 +47,7 @@ export const getColor = (colorName: string) => {
   const color = colors.find((color) => color.name === colorName);
   return color ? color.color : "#FFFFFF";
 };
+
+export const getColorNameList = () => {
+  return colors.map((color) => color.name);
+};

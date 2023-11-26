@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import InputTask from '../components/InputTask.vue'
 import ShowTaskList from '../components/ShowTaskList.vue'
-import ShowTaskListStats from '../components/ShowTaskListStats.vue'
 
 </script>
 
@@ -15,7 +14,6 @@ import ShowTaskListStats from '../components/ShowTaskListStats.vue'
           <InputTask />
         </div>
         <div class="mt-4 w-full">
-          <ShowTaskListStats />
           <ShowTaskList />
         </div>
       </div>
