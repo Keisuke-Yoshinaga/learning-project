@@ -38,16 +38,18 @@ const errorMessage: Ref<string> = ref("");
 
 // 必須入力チェック
 const requiredValidation = (): boolean => {
-  if (!title.value) {
-    if (!title.value.trim()) {
-      // 入力が空orスペースのみの場合はエラーメッセージを表示
-      errorMessage.value = "入力してください。";
-      return false;
-    }
-  } else {
-    errorMessage.value = "";
-    return true;
+  if (title.value == null) {
+    errorMessage.value = "入力してください。";
+    return false;
   }
+
+  if (!title.value.trim()) {
+    // 入力が空orスペースのみの場合はエラーメッセージを表示
+    errorMessage.value = "入力してください。";
+    return false;
+  }
+
+  errorMessage.value = "";
   return true;
 }
 
@@ -65,6 +67,18 @@ const saveTask = () => {
 
   dialogStore.closeDialog();
 };
+
+watchEffect(() => {
+  if (dialogStore.isOpen == false) {
+    // ダイアログが閉じられたら初期化
+    title.value = '';
+    memo.value = '';
+    dueDate.value = null;
+    color.value = "white";
+    parentTaskId.value = '';
+    errorMessage.value = '';
+  }
+});
 
 </script>
 
@@ -86,7 +100,7 @@ const saveTask = () => {
       <v-card-subtitle v-if="parentTaskId != ''" class="text-right px-8">親タスク：{{ taskListStore.getTask(parentTaskId)?.title }}</v-card-subtitle>
       <v-card-text>
         <!-- タスク名 -->
-        <v-text-field v-model="title" label="タスク" clearable variant="outlined" :error-messages="errorMessage"></v-text-field>
+        <v-text-field v-model="title" class="mb-3" label="タスク" clearable variant="outlined" :error-messages="errorMessage"></v-text-field>
         <v-textarea v-model="memo" clearable clear-icon="mdi-close-circle-outline" label="メモ" variant="outlined"></v-textarea>
         <!-- 期日 -->
         <!-- todo default時間 -->
