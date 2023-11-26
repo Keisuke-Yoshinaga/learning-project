@@ -18,7 +18,7 @@ let filters = ref<string[]>([]);
 
 <template>
   <!-- TODO フィルター機能 -->
-  <v-row class="w-full" justify="end">
+  <v-row class="w-full mt-2" justify="end">
     <ShowTaskListStats :filters="filters" />
     <!-- フィルターボタン -->
     <v-btn v-if="!filters.length" density="compact" icon="mdi-filter-outline" variant="plain" @click="filterDialog = true"></v-btn>

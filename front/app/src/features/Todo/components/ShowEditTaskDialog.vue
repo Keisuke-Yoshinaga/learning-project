@@ -104,7 +104,7 @@ const saveTask = () => {
       <v-card-actions>
         <v-spacer></v-spacer>
         <!-- 保存 -->
-        <v-btn color="primary" @click="saveTask">保存</v-btn>
+        <v-btn color="primary" @click="saveTask">SAVE</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
