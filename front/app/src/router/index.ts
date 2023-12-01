@@ -22,16 +22,6 @@ const routes = [
         name: "Todo",
         component: () => import("@/features/Todo/views/Todo.vue"),
       },
-      {
-        path: "/register",
-        name: "RegisterTask",
-        component: () => import("@/features/Todo/views/RegisterTask.vue"),
-      },
-      {
-        path: "/edit/:id",
-        name: "EditTask",
-        component: () => import("@/features/Todo/views/EditTask.vue"),
-      },
     ],
   },
 ];

@@ -2,6 +2,12 @@ import { defineStore } from "pinia";
 import { TaskList } from "../types/TaskList";
 import { v4 as uuidv4 } from "uuid";
 import { colors } from "../utils/Colors";
+import { Filters } from "../types/Filters";
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
 
 export const useTaskListStore = defineStore("taskList", {
   state: (): TaskList => ({
@@ -21,7 +27,7 @@ export const useTaskListStore = defineStore("taskList", {
         id: "2",
         title: "sample2",
         memo: "sample2",
-        dueDate: null,
+        dueDate: today,
         color: "blue",
         checked: false,
         parentTaskId: "",
@@ -32,7 +38,7 @@ export const useTaskListStore = defineStore("taskList", {
         id: "3",
         title: "sample3",
         memo: "sample3",
-        dueDate: null,
+        dueDate: tomorrow,
         color: "green",
         checked: false,
         parentTaskId: "",
@@ -68,11 +74,19 @@ export const useTaskListStore = defineStore("taskList", {
     getTaskList(state) {
       return state.taskList;
     },
+    // 全タスクIDリストを取得
+    getTaskIdList(state) {
+      return state.taskList.map((task) => task.id);
+    },
     // タスクを取得
     getTask: (state) => (id: string) => {
       return state.taskList.find((task) => task.id === id);
     },
-    // メインタスクを取得
+    // 親タスクかどうか
+    isParentTask: (state) => (id: string) => {
+      return state.taskList.find((task) => task.id === id)?.parentTaskId === "";
+    },
+    // 親タスクを取得
     getMainTaskList(state) {
       return state.taskList.filter((task) => task.parentTaskId === "");
     },
@@ -80,71 +94,78 @@ export const useTaskListStore = defineStore("taskList", {
     getSubTaskList: (state) => (id: string) => {
       return state.taskList.filter((task) => task.parentTaskId === id);
     },
-    // フィルター
-    getFilterTaskList: (state) => (filters: string[]) => {
-      if (filters.length === 0) {
-        return state.taskList.filter((task) => task.parentTaskId === "");
-      } else {
-        const colorFilter = filters.map((filter) => {
-          return colors[Number(filter)].name;
+    // フィルター後のタスクIDリストを取得（表示用）
+    getFilterTaskIdListForView: (state) => (filters: Filters) => {
+      let filteredTaskList = state.taskList;
+      // フィルターが何も選択されていない場合は親タスクのみ取得
+      if (
+        filters.colors.length === 0 &&
+        filters.checked === null &&
+        filters.overdue === null
+      ) {
+        filteredTaskList = filteredTaskList.filter(
+          (task) => task.parentTaskId === "",
+        );
+      }
+      // 色フィルター
+      if (filters.colors.length !== 0) {
+        // 選択された色のタスクのみ取得
+        const colorFilter = filters.colors.map((color) => {
+          return colors[Number(color)].name;
         });
-        return state.taskList.filter((task) =>
+        filteredTaskList = filteredTaskList.filter((task) =>
           colorFilter.includes(task.color),
         );
       }
-    },
-    getTaskListLength: (state) => (filters: string[]) => {
-      if (filters.length === 0) {
-        return state.taskList.length;
-      } else {
-        const colorFilter = filters.map((filter) => {
-          return colors[Number(filter)].name;
-        });
-        return state.taskList.filter((task) => colorFilter.includes(task.color))
-          .length;
+      // チェックフィルター
+      if (filters.checked !== null) {
+        filteredTaskList = filteredTaskList.filter(
+          (task) => task.checked === filters.checked,
+        );
       }
-    },
-    getTaskListCheckedLength: (state) => (filters: string[]) => {
-      if (filters.length === 0) {
-        return state.taskList.filter((task) => task.checked).length;
-      } else {
-        const colorFilter = filters.map((filter) => {
-          return colors[Number(filter)].name;
+      // 期限フィルター
+      if (filters.overdue !== null) {
+        filteredTaskList = filteredTaskList.filter((task) => {
+          if (task.dueDate !== null) {
+            return task.dueDate > today === filters.overdue;
+          }
         });
-        return state.taskList.filter(
-          (task) => colorFilter.includes(task.color) && task.checked,
-        ).length;
       }
+      return filteredTaskList.map((task) => task.id);
     },
-    getTaskListUncheckedLength: (state) => (filters: string[]) => {
-      if (filters.length === 0) {
-        return state.taskList.filter((task) => !task.checked).length;
-      } else {
-        const colorFilter = filters.map((filter) => {
-          return colors[Number(filter)].name;
+    // フィルター後のタスクリストを取得（スタッツ用）
+    getFilterTaskListForStats: (state) => (filters: Filters) => {
+      let filteredTaskList = state.taskList;
+      // 色フィルター
+      if (filters.colors.length !== 0) {
+        // 選択された色のタスクのみ取得
+        const colorFilter = filters.colors.map((color) => {
+          return colors[Number(color)].name;
         });
-        return state.taskList.filter(
-          (task) => colorFilter.includes(task.color) && !task.checked,
-        ).length;
+        filteredTaskList = filteredTaskList.filter((task) =>
+          colorFilter.includes(task.color),
+        );
       }
+      // チェックフィルター
+      if (filters.checked !== null) {
+        filteredTaskList = filteredTaskList.filter(
+          (task) => task.checked === filters.checked,
+        );
+      }
+      // 期限フィルター
+      if (filters.overdue !== null) {
+        filteredTaskList = filteredTaskList.filter((task) => {
+          if (task.dueDate !== null) {
+            return task.dueDate > today === filters.overdue;
+          }
+        });
+      }
+      return filteredTaskList;
     },
   },
   actions: {
     // タスクを追加
-    addTask(inputValue: string) {
-      this.taskList.push({
-        id: uuidv4(),
-        title: inputValue.trim(),
-        memo: "",
-        dueDate: null,
-        color: "white",
-        checked: false,
-        parentTaskId: "",
-        registerDate: new Date(),
-        updateDate: new Date(),
-      });
-    },
-    addDetailTask(
+    addTask(
       title: string,
       memo: string,
       dueDate: Date | null,

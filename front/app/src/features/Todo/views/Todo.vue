@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import InputTask from '../components/InputTask.vue'
 import ShowTaskList from '../components/ShowTaskList.vue'
+import ShowEditTaskDialog from '../components/ShowEditTaskDialog.vue'
+import ShowTaskListHeader from '../components/ShowTaskListHeader.vue';
+
 
 </script>
 
@@ -11,7 +14,9 @@ import ShowTaskList from '../components/ShowTaskList.vue'
       <h1 class="mt-4 text-4xl font-bold">Todoリスト</h1>
       <div class="mt-4 w-full max-w-xl">
         <InputTask />
+        <ShowTaskListHeader />
         <ShowTaskList />
+        <ShowEditTaskDialog />
       </div>
     </div>
   </v-container>

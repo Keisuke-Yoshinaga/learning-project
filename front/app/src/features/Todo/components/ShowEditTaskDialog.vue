@@ -5,7 +5,7 @@ import { useTaskListStore } from '../store/taskList';
 import { useEditTaskDialogStore } from '../store/editTaskDialog';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { dateFormat } from '../utils/DateFormat';
+import { dateFormat, getTomorrow } from '../utils/DateFormat';
 import { colors } from '../utils/Colors';
 
 const taskListStore = useTaskListStore();
@@ -59,7 +59,7 @@ const saveTask = () => {
   }
   if (dialogStore.getTaskId == '') {
     // 新規タスクの場合
-    taskListStore.addDetailTask(title.value, memo.value, dueDate.value, color.value, parentTaskId.value);
+    taskListStore.addTask(title.value, memo.value, dueDate.value, color.value, parentTaskId.value);
   } else {
     // 既存タスクの場合
     taskListStore.editTask(dialogStore.getTaskId, title.value, memo.value, dueDate.value, color.value);
@@ -79,6 +79,12 @@ watchEffect(() => {
     errorMessage.value = '';
   }
 });
+
+const setDefaultDate = () => {
+  if (dueDate.value == null) {
+    dueDate.value = getTomorrow();
+  }
+}
 
 </script>
 
@@ -103,9 +109,8 @@ watchEffect(() => {
         <v-text-field v-model="title" class="mb-3" label="タスク" clearable variant="outlined" :error-messages="errorMessage"></v-text-field>
         <v-textarea v-model="memo" clearable clear-icon="mdi-close-circle-outline" label="メモ" variant="outlined"></v-textarea>
         <!-- 期日 -->
-        <!-- todo default時間 -->
         <div class="my-2">期日</div>
-        <VueDatePicker v-model="dueDate" :teleport="true" locale="ja" :format=dateFormat time-picker-inline />
+        <VueDatePicker v-model="dueDate" :teleport="true" locale="ja" :format=dateFormat time-picker-inline @open="setDefaultDate" />
         <!-- ラベルカラーの追加 -->
         <div class="mt-6 mb-2">ラベルカラー</div>
         <v-chip-group v-model="color" column>
