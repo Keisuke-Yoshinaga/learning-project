@@ -38,15 +38,4 @@ export default defineConfig({
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
-  server: {
-    port: 3000,
-    host: "0.0.0.0",
-    proxy: {
-      "/api": {
-        target: "http://back:5001",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
 });

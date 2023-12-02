@@ -1,18 +1,5 @@
 version: "3"
 services:
-  back:
-    build:
-      context: ./back
-      dockerfile: Dockerfile
-    ports:
-      - 5001:5001 # 本番で動かす際はコメントアウト
-    volumes:
-      - ./back/app:/app/
-    tty: true
-    # restart: on-failure
-    working_dir: /app
-    command: uvicorn src.main:app --reload --host 0.0.0.0 --port 5001
-
   front:
     build:
       context: ./front
@@ -42,19 +29,5 @@ services:
       - ./front/app/dist:/www/dist
     tty: true
     # restart: on-failure
-
-  # db:
-  #   image: postgres:14 #イメージ名:バージョン
-  #   ports:
-  #     - 5432:5432
-  #   restart: always
-  #   environment:
-  #     POSTGRES_DB: postgres #データベース名
-  #     POSTGRES_USER: user #ユーザー名
-  #     POSTGRES_PASSWORD: password #パスワード
-  #   volumes:
-  #     - ./data:/var/lib/postgresql/data
-  #     - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-
 volumes:
   node_modules:
