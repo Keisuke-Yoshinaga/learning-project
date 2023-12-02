@@ -1,7 +1,13 @@
 <script lang="ts" setup>
 import { useTaskListStore } from '../store/taskList'
+import { useFiltersStore } from '../store/filters';
+import { computed } from 'vue';
+import { Task } from '../types/Task';
 
 const taskListStore = useTaskListStore();
+const filtersStore = useFiltersStore();
+
+const taskList = computed<Task[]>(() => taskListStore.getFilterTaskListForStats(filtersStore.getFilters));
 
 </script>
 
@@ -9,15 +15,15 @@ const taskListStore = useTaskListStore();
   <v-row>
     <v-col xs="12" class="text-center">
       <span>全：</span>
-      <span>{{ taskListStore.getTaskListLength }}</span>
+      <span>{{ taskList.length }}</span>
     </v-col>
     <v-col xs="12" class="text-center">
       <span>完了：</span>
-      <span>{{ taskListStore.getTaskListCheckedLength }}</span>
+      <span>{{ taskList.filter((task) => task.checked === true).length }}</span>
     </v-col>
     <v-col xs="12" class="text-center">
       <span>残：</span>
-      <span>{{ taskListStore.getTaskListUncheckedLength }}</span>
+      <span>{{ taskList.filter((task) => task.checked === false).length }}</span>
     </v-col>
   </v-row>
 </template>
