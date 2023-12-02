@@ -7,6 +7,10 @@ export const useEditTaskDialogStore = defineStore("editTaskDialog", {
     taskId: "",
     parentTaskId: "",
   }),
+  persist: {
+    storage: window.localStorage,
+    key: "editTaskDialog",
+  },
   getters: {
     getIsOpen(): boolean {
       return this.isOpen;

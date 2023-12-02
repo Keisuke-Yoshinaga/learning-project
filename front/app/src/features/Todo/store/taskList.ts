@@ -69,6 +69,10 @@ export const useTaskListStore = defineStore("taskList", {
       },
     ],
   }),
+  persist: {
+    storage: window.localStorage,
+    key: "taskList",
+  },
   getters: {
     // 全タスクリストを取得
     getTaskList(state) {

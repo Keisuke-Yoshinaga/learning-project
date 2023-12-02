@@ -7,6 +7,10 @@ export const useFiltersStore = defineStore("filters", {
     checked: null,
     overdue: null,
   }),
+  persist: {
+    storage: window.localStorage,
+    key: "filters",
+  },
   getters: {
     getFilters(): Filters {
       return this;
