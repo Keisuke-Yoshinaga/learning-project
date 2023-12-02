@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { useTaskListStore } from '../store/taskList'
-import { useFiltersStore } from '../store/filters';
+import { useTaskListStore } from '@/features/Todo/store/taskList'
+import { useFiltersStore } from '@/features/Todo/store/filters';
 import { computed } from 'vue';
-import { Task } from '../types/Task';
+import { Task } from '@/features/Todo/types/Task';
 
 const taskListStore = useTaskListStore();
 const filtersStore = useFiltersStore();

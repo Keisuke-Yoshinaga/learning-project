@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import InputTask from '../components/InputTask.vue'
-import ShowTaskList from '../components/ShowTaskList.vue'
-import ShowEditTaskDialog from '../components/ShowEditTaskDialog.vue'
-import ShowTaskListHeader from '../components/ShowTaskListHeader.vue';
+import InputTask from "@/features/Todo/components/InputTask.vue";
+import ShowTaskList from "@/features/Todo/components/ShowTaskList.vue";
+import ShowEditTaskDialog from "@/features/Todo/components/ShowEditTaskDialog.vue";
+import ShowTaskListHeader from "@/features/Todo/components/ShowTaskListHeader.vue";
 
 
 </script>

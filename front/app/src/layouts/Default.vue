@@ -6,6 +6,6 @@
 </template>
 
 <script lang="ts" setup>
-import Header from './components/Header.vue'
-import MainView from './components/MainView.vue'
+import Header from "@/layouts/Header.vue";
+import MainView from "@/layouts/MainView.vue";
 </script>

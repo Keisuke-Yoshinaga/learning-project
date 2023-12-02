@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { colors } from '../utils/Colors';
+import { colors } from '@/features/Todo/utils/Colors';
 import { computed, ref } from 'vue';
-import { useFiltersStore } from '../store/filters';
-import ShowTaskListStats from '../components/ShowTaskListStats.vue'
+import { useFiltersStore } from '@/features/Todo/store/filters';
+import ShowTaskListStats from '@/features/Todo/components/ShowTaskListStats.vue'
 
 const filtersStore = useFiltersStore();
 

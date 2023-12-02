@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { EditTaskDialog } from "../types/EditTaskDialog";
+import { EditTaskDialog } from "@/features/Todo/types/EditTaskDialog";
 
 export const useEditTaskDialogStore = defineStore("editTaskDialog", {
   state: (): EditTaskDialog => ({

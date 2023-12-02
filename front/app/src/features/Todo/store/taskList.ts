@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { TaskList } from "../types/TaskList";
+import { TaskList } from "@/features/Todo/types/TaskList";
 import { v4 as uuidv4 } from "uuid";
-import { colors } from "../utils/Colors";
-import { Filters } from "../types/Filters";
+import { colors } from "@/features/Todo/utils/Colors";
+import { Filters } from "@/features/Todo/types/Filters";
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { useEditTaskDialogStore } from '../store/editTaskDialog';
+import { useEditTaskDialogStore } from "@/features/Todo/store/editTaskDialog";
 
 const dialogStore = useEditTaskDialogStore();
-
 </script>
 
 <template>

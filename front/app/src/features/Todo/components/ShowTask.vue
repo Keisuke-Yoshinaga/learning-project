@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useTaskListStore } from '../store/taskList'
-import { useEditTaskDialogStore } from '../store/editTaskDialog';
-import { getColor } from '../utils/Colors';
-import { dateFormat, isPastDueDate } from '../utils/DateFormat';
+import { useTaskListStore } from '@/features/Todo/store/taskList';
+import { useEditTaskDialogStore } from '@/features/Todo/store/editTaskDialog';
+import { getColor } from '@/features/Todo/utils/Colors'
+import { dateFormat, isPastDueDate } from '@/features/Todo/utils/DateFormat';
 import { computed } from 'vue';
-import { Task } from '../types/Task';
+import { Task } from '@/features/Todo/types/Task';
 
 
 const taskListStore = useTaskListStore();

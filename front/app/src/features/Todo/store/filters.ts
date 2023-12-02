@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Filters } from "../types/Filters";
+import { Filters } from "@/features/Todo/types/Filters";
 
 export const useFiltersStore = defineStore("filters", {
   state: (): Filters => ({
