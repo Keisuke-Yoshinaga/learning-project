@@ -91,11 +91,11 @@ export const useTaskListStore = defineStore("taskList", {
       return state.taskList.find((task) => task.id === id)?.parentTaskId === "";
     },
     // 親タスクを取得
-    getMainTaskList(state) {
+    getParentTaskList(state) {
       return state.taskList.filter((task) => task.parentTaskId === "");
     },
     // サブタスクを取得
-    getSubTaskList: (state) => (id: string) => {
+    getChildTaskList: (state) => (id: string) => {
       return state.taskList.filter((task) => task.parentTaskId === id);
     },
     // フィルター後のタスクIDリストを取得（表示用）
@@ -213,9 +213,9 @@ export const useTaskListStore = defineStore("taskList", {
       const index = this.taskList.findIndex((task) => task.id === id);
       this.taskList.splice(index, 1);
       // 削除時にサブタスクも削除する
-      const subTaskList = this.getSubTaskList(id);
-      subTaskList.forEach((subTask) => {
-        this.deleteTask(subTask.id);
+      const childTaskList = this.getChildTaskList(id);
+      childTaskList.forEach((childTask) => {
+        this.deleteTask(childTask.id);
       });
     },
   },

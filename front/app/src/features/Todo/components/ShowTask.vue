@@ -10,7 +10,7 @@ import { Task } from '@/features/Todo/types/Task';
 const taskListStore = useTaskListStore();
 const dialogStore = useEditTaskDialogStore();
 
-const props = defineProps<{ taskId: string, subTask: boolean }>();
+const props = defineProps<{ taskId: string, childTask: boolean }>();
 const task = computed<Task | undefined>(() => taskListStore.getTask(props.taskId));
 
 let deleteDialog = ref(false);
@@ -35,7 +35,7 @@ const deleteTask = (id: string) => {
 </script>
 
 <template>
-  <v-list-item v-if="task" class="rounded-md border-l-8 bg-white shadow-md px-2" :style="{ borderColor: getColor(task.color) }" :class="{ 'mt-2': !subTask }">
+  <v-list-item v-if="task" class="rounded-md border-l-8 bg-white shadow-md px-2" :style="{ borderColor: getColor(task.color) }" :class="{ 'mt-2': !childTask }">
     <v-list-item-title>
       <input v-model="task.title" class="w-full focus:outline-none" :class="{ 'text-decoration-line-through': task.checked }" :disabled="task.checked" readonly />
     </v-list-item-title>
