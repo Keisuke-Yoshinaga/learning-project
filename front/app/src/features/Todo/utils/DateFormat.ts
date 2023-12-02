@@ -1,5 +1,6 @@
 // 日付フォーマット
 export const dateFormat = (date: Date) => {
+  date = new Date(date);
   const year: number = date.getFullYear();
   const month: number = date.getMonth() + 1;
   const day: number = date.getDate();

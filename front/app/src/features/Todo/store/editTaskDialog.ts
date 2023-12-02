@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { EditTaskDialog } from "../types/EditTaskDialog";
+import { EditTaskDialog } from "@/features/Todo/types/EditTaskDialog";
 
 export const useEditTaskDialogStore = defineStore("editTaskDialog", {
   state: (): EditTaskDialog => ({
@@ -7,6 +7,10 @@ export const useEditTaskDialogStore = defineStore("editTaskDialog", {
     taskId: "",
     parentTaskId: "",
   }),
+  persist: {
+    storage: window.localStorage,
+    key: "editTaskDialog",
+  },
   getters: {
     getIsOpen(): boolean {
       return this.isOpen;

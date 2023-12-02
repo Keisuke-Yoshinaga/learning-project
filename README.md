@@ -18,10 +18,6 @@ $ docker-compose exec front yarn dev
 
 2. http://localhost:3000 にアクセス(vite の開発環境へのアクセス)
 
-## 開発環境 (バックエンド)
-
-1. http://localhost:5001/docs にアクセス(fastAPI docs へのアクセス)
-
 ## 本番環境
 
 1. フロント側のビルド

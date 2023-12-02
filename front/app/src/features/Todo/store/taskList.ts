@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { TaskList } from "../types/TaskList";
+import { TaskList } from "@/features/Todo/types/TaskList";
 import { v4 as uuidv4 } from "uuid";
-import { colors } from "../utils/Colors";
-import { Filters } from "../types/Filters";
+import { colors } from "@/features/Todo/utils/Colors";
+import { Filters } from "@/features/Todo/types/Filters";
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -69,6 +69,10 @@ export const useTaskListStore = defineStore("taskList", {
       },
     ],
   }),
+  persist: {
+    storage: window.localStorage,
+    key: "taskList",
+  },
   getters: {
     // 全タスクリストを取得
     getTaskList(state) {
@@ -87,11 +91,11 @@ export const useTaskListStore = defineStore("taskList", {
       return state.taskList.find((task) => task.id === id)?.parentTaskId === "";
     },
     // 親タスクを取得
-    getMainTaskList(state) {
+    getParentTaskList(state) {
       return state.taskList.filter((task) => task.parentTaskId === "");
     },
     // サブタスクを取得
-    getSubTaskList: (state) => (id: string) => {
+    getChildTaskList: (state) => (id: string) => {
       return state.taskList.filter((task) => task.parentTaskId === id);
     },
     // フィルター後のタスクIDリストを取得（表示用）
@@ -209,9 +213,9 @@ export const useTaskListStore = defineStore("taskList", {
       const index = this.taskList.findIndex((task) => task.id === id);
       this.taskList.splice(index, 1);
       // 削除時にサブタスクも削除する
-      const subTaskList = this.getSubTaskList(id);
-      subTaskList.forEach((subTask) => {
-        this.deleteTask(subTask.id);
+      const childTaskList = this.getChildTaskList(id);
+      childTaskList.forEach((childTask) => {
+        this.deleteTask(childTask.id);
       });
     },
   },

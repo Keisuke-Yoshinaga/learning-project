@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { useTaskListStore } from '../store/taskList'
-import { useFiltersStore } from '../store/filters';
-import ShowTask from '../components/ShowTask.vue'
-import ShowSubTaskList from '../components/ShowSubTaskList.vue'
+import { useTaskListStore } from '@/features/Todo/store/taskList'
+import { useFiltersStore } from '@/features/Todo/store/filters';
+import ShowTask from '@/features/Todo/components/ShowTask.vue'
+import ShowChildTaskList from '@/features/Todo/components/ShowChildTaskList.vue'
 
 const taskListStore = useTaskListStore();
 const filtersStore = useFiltersStore();
@@ -12,8 +12,8 @@ const filtersStore = useFiltersStore();
 <template>
   <v-list v-if="taskListStore.getFilterTaskIdListForView(filtersStore.getFilters).length" lines="two" class="bg-inherit" :class="[]">
     <template v-for="id in taskListStore.getFilterTaskIdListForView(filtersStore.getFilters)" :key="id">
-      <ShowTask :taskId="id" :subTask=false />
-      <ShowSubTaskList v-if="filtersStore.isNull" :taskId="id" />
+      <ShowTask :taskId="id" :childTask=false />
+      <ShowChildTaskList v-if="filtersStore.isNull" :taskId="id" />
     </template>
   </v-list>
 </template>

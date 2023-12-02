@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import { ref, watchEffect } from 'vue';
-import { useTaskListStore } from '../store/taskList';
-import { useEditTaskDialogStore } from '../store/editTaskDialog';
+import { useTaskListStore } from '@/features/Todo/store/taskList';
+import { useEditTaskDialogStore } from '@/features/Todo/store/editTaskDialog';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { dateFormat, getTomorrow } from '../utils/DateFormat';
-import { colors } from '../utils/Colors';
+import { dateFormat, getTomorrow } from '@/features/Todo/utils/DateFormat';
+import { colors } from '@/features/Todo/utils/Colors';
 
 const taskListStore = useTaskListStore();
 const dialogStore = useEditTaskDialogStore();
@@ -123,7 +123,7 @@ const setDefaultDate = () => {
       <v-card-actions>
         <v-spacer></v-spacer>
         <!-- 保存 -->
-        <v-btn color="primary" @click="saveTask">SAVE</v-btn>
+        <v-btn color="primary" @click="saveTask">保存</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

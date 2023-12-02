@@ -5,7 +5,7 @@ import ViteFonts from "unplugin-fonts/vite";
 
 // Utilities
 import { defineConfig } from "vite";
-import { fileURLToPath, URL } from "node:url";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -34,19 +34,8 @@ export default defineConfig({
   define: { "process.env": {} },
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@": path.resolve(__dirname, "./src"),
     },
     extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
-  },
-  server: {
-    port: 3000,
-    host: "0.0.0.0",
-    proxy: {
-      "/api": {
-        target: "http://back:5001",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
   },
 });
