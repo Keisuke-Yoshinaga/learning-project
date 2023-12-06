@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary">
+  <v-app-bar id="header" color="primary">
 
     <v-app-bar-nav-icon @click.stop="drawer = !drawer">
     </v-app-bar-nav-icon>
@@ -9,7 +9,7 @@
     </v-app-bar-title>
   </v-app-bar>
 
-  <v-navigation-drawer v-model="drawer">
+  <v-navigation-drawer id="nav" v-model="drawer">
     <v-list nav>
       <v-list-item prepend-icon="mdi-view-dashboard" title="Top" value="top" :to="'/'">
       </v-list-item>
@@ -26,3 +26,16 @@ export default {
   }),
 }
 </script>
+
+<style>
+@media screen and (max-width: 520px) {
+  #header {
+    display: none !important;
+  }
+
+  #nav {
+    height: 100% !important;
+    top: 0px !important;
+  }
+}
+</style>

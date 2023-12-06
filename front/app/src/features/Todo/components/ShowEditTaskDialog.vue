@@ -89,12 +89,12 @@ const setDefaultDate = () => {
 </script>
 
 <template>
-  <v-dialog v-model="dialogStore.getIsOpen" persistent no-click-animation width="50%">
+  <v-dialog v-model="dialogStore.getIsOpen" persistent no-click-animation width="80%">
     <v-card>
-      <v-toolbar color="white" flat>
-        <v-toolbar-title class="grey--text text--darken-4">
-          <div v-if="dialogStore.getTaskId == ''" class="bold ms-6">タスクの追加</div>
-          <div v-else class="bold ms-6">タスクの修正</div>
+      <v-toolbar>
+        <v-toolbar-title>
+          <div v-if="dialogStore.getTaskId == ''" class="bold">タスクの追加</div>
+          <div v-else class="bold">タスクの修正</div>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon light @click="dialogStore.closeDialog()">

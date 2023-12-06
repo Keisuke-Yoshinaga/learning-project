@@ -16,12 +16,12 @@ const colorFilters = computed({
 </script>
 
 <template>
-  <v-row class="w-full mt-2" justify="end">
+  <div class="mx-2 flex">
     <ShowTaskListStats />
     <!-- フィルターボタン -->
-    <v-btn v-if="!colorFilters.length" density="compact" icon="mdi-filter-outline" variant="plain" @click="filterDialog = true"></v-btn>
+    <v-btn v-if="!colorFilters.length" class="ml-auto" density="compact" icon="mdi-filter-outline" variant="plain" @click="filterDialog = true"></v-btn>
     <v-btn v-else density="compact" icon="mdi-filter-check" variant="plain" @click="filterDialog = true"></v-btn>
-    <v-dialog v-model="filterDialog" width="50%">
+    <v-dialog v-model="filterDialog" width="80%">
       <v-card class="mx-auto">
         <v-toolbar>
           <v-toolbar-title>Filter</v-toolbar-title>
@@ -43,5 +43,5 @@ const colorFilters = computed({
         </v-card-text>
       </v-card>
     </v-dialog>
-  </v-row>
+  </div>
 </template>

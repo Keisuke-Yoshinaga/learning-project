@@ -9,9 +9,9 @@ import ShowTaskListHeader from "@/features/Todo/components/ShowTaskListHeader.vu
 
 
 <template>
-  <v-container class="h-100">
-    <div class="h-100 flex flex-col items-center bg-slate-100">
-      <div class="mt-4 w-full max-w-xl">
+  <v-container class="h-100 bg-slate-100">
+    <div class="h-100 flex flex-col items-center">
+      <div class="w-full max-w-xl">
         <InputTask />
         <ShowTaskListHeader />
         <ShowTaskList />
@@ -20,3 +20,7 @@ import ShowTaskListHeader from "@/features/Todo/components/ShowTaskListHeader.vu
     </div>
   </v-container>
 </template>
+
+<style>
+@media screen and (max-width: 520px) {}
+</style>

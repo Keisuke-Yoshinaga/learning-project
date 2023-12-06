@@ -1,16 +1,19 @@
 <template>
-  <v-tabs v-model="tab" align-tabs="end">
+  <v-tabs v-model="tab">
     <v-tab value="VIEW">VIEW</v-tab>
     <v-tab value="EDIT">EDIT</v-tab>
+    <v-btn class="ml-auto" @click="saveMarkdown">SAVE</v-btn>
+    <v-divider vertical class="mx-2"></v-divider>
+    <v-btn icon="mdi-dots-vertical" variant="plain" size="small" class="mr-2"></v-btn>
   </v-tabs>
-  <v-window v-model="tab">
+  <v-window v-model="tab" :touch=false>
     <v-window-item value="VIEW">
       <v-container>
         <MdPreview :modelValue="markdown" language="jp_JP" />
       </v-container>
     </v-window-item>
     <v-window-item value="EDIT">
-      <MdEditor v-model="markdown" language="jp_JP" :toolbarsExclude="exclude" @onSave="saveMarkdown" />
+      <MdEditor v-model="markdown" language="jp_JP" :toolbars="include" :preview=false />
     </v-window-item>
   </v-window>
 </template>
@@ -29,7 +32,31 @@ const markdownStore = useMarkdownStore();
 
 const tab = ref('VIEW');
 
-const exclude: ToolbarNames[] = ['image'];
+const include: ToolbarNames[] = [
+  'revoke',
+  'next',
+  '-',
+  'bold',
+  'underline',
+  'italic',
+  '-',
+  'title',
+  'strikeThrough',
+  'sub',
+  'sup',
+  'quote',
+  'unorderedList',
+  'orderedList',
+  'task',
+  '-',
+  'codeRow',
+  'code',
+  'link',
+  // 'image',
+  'table',
+  'mermaid',
+  'katex',
+];
 
 config({
   editorConfig: {
@@ -44,7 +71,22 @@ const markdown = ref(markdownStore.getMarkdown);
 const saveMarkdown = () => {
   markdownStore.setMarkdown(markdown.value);
   const $toast = useToast();
-  $toast.success("保存!");
+  $toast.success("保存!", {
+    position: 'top',
+    dismissible: true,
+  });
 }
 
 </script>
+
+<style>
+.v-slide-group__content {
+  align-items: baseline;
+}
+
+@media screen and (max-width: 520px) {
+  #md-editor-v3-preview {
+    font-size: 12px !important;
+  }
+}
+</style>

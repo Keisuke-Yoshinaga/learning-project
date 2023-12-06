@@ -48,7 +48,7 @@ const deleteTask = (id: string) => {
     </template>
 
     <template v-slot:append>
-      <v-btn color="secondary" density="compact" icon="mdi-plus" @click="dialogStore.openNewDialog(task.id)">
+      <v-btn v-if="!taskListStore.isGrandChildTask(task.id)" color="secondary" density="compact" icon="mdi-plus" @click="dialogStore.openNewDialog(task.id)">
       </v-btn>
       <v-btn class="ml-4" color="primary" density="compact" icon="mdi-pencil" @click="dialogStore.openEditDialog(task.id)">
       </v-btn>

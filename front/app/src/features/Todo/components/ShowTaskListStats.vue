@@ -12,18 +12,18 @@ const taskList = computed<Task[]>(() => taskListStore.getFilterTaskListForStats(
 </script>
 
 <template>
-  <v-row>
-    <v-col xs="12" class="text-center">
+  <div class="flex grow">
+    <div class="grow">
       <span>全：</span>
       <span>{{ taskList.length }}</span>
-    </v-col>
-    <v-col xs="12" class="text-center">
+    </div>
+    <div class="grow">
       <span>完了：</span>
       <span>{{ taskList.filter((task) => task.checked === true).length }}</span>
-    </v-col>
-    <v-col xs="12" class="text-center">
+    </div>
+    <div class="grow">
       <span>残：</span>
       <span>{{ taskList.filter((task) => task.checked === false).length }}</span>
-    </v-col>
-  </v-row>
+    </div>
+  </div>
 </template>

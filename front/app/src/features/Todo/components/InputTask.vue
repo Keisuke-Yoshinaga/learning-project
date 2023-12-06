@@ -7,7 +7,7 @@ const dialogStore = useEditTaskDialogStore();
 <template>
   <v-row>
     <v-col>
-      <v-btn color="primary" class="w-full rounded mt-2" @click="dialogStore.openNewDialog('')">
+      <v-btn color="primary" class="w-full rounded my-2" @click="dialogStore.openNewDialog('')">
         新規タスク追加
       </v-btn>
     </v-col>

@@ -90,6 +90,23 @@ export const useTaskListStore = defineStore("taskList", {
     isParentTask: (state) => (id: string) => {
       return state.taskList.find((task) => task.id === id)?.parentTaskId === "";
     },
+    // 孫タスクかどうか
+    isGrandChildTask: (state) => (id: string) => {
+      // 親タスクが存在するかどうか
+      if (state.taskList.find((task) => task.id === id)?.parentTaskId === "") {
+        return false;
+      }
+      // 親タスクの親タスクが存在するかどうか
+      const parentTaskId = state.taskList.find((task) => task.id === id)
+        ?.parentTaskId;
+      if (
+        state.taskList.find((task) => task.id === parentTaskId)
+          ?.parentTaskId === ""
+      ) {
+        return false;
+      }
+      return true;
+    },
     // 親タスクを取得
     getParentTaskList(state) {
       return state.taskList.filter((task) => task.parentTaskId === "");
