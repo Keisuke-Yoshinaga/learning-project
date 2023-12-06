@@ -11,7 +11,7 @@
 
   <v-navigation-drawer id="nav" v-model="drawer">
     <v-list nav>
-      <v-list-item prepend-icon="mdi-view-dashboard" title="Top" value="top" :to="'/'">
+      <v-list-item prepend-icon="mdi-view-dashboard" title="TOP" value="top" :to="'/'">
       </v-list-item>
       <v-list-item prepend-icon="mdi-format-list-checks" title="TODO" value="todo" :to="'/todo'">
       </v-list-item>
