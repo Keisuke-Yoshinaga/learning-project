@@ -13,7 +13,7 @@
       </v-container>
     </v-window-item>
     <v-window-item value="EDIT">
-      <MdEditor v-model="markdown" language="jp_JP" :toolbars="include" :preview=false />
+      <MdEditor v-model="markdown" language="jp_JP" :toolbars="include" :preview="false" showCodeRowNumber />
     </v-window-item>
   </v-window>
 </template>
@@ -56,6 +56,15 @@ const include: ToolbarNames[] = [
   'table',
   'mermaid',
   'katex',
+  // 'save',
+  '=',
+  // 'pageFullscreen',
+  // 'fullscreen',
+  'preview',
+  // 'htmlPreview',
+  // 'catalog',
+  // 'github'
+
 ];
 
 config({
