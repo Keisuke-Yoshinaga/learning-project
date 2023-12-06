@@ -106,13 +106,13 @@ const setDefaultDate = () => {
       <v-card-subtitle v-if="parentTaskId != ''" class="text-right px-8">親タスク：{{ taskListStore.getTask(parentTaskId)?.title }}</v-card-subtitle>
       <v-card-text>
         <!-- タスク名 -->
-        <v-text-field v-model="title" class="mb-3" label="タスク" clearable variant="outlined" :error-messages="errorMessage"></v-text-field>
-        <v-textarea v-model="memo" clearable clear-icon="mdi-close-circle-outline" label="メモ" variant="outlined"></v-textarea>
+        <v-text-field v-model="title" class="mb-1" label="タスク" clearable variant="outlined" :error-messages="errorMessage"></v-text-field>
+        <v-textarea v-model="memo" class="mb-1" clearable clear-icon="mdi-close-circle-outline" label="メモ" variant="outlined" hide-details="auto"></v-textarea>
         <!-- 期日 -->
         <div class="my-2">期日</div>
         <VueDatePicker v-model="dueDate" :teleport="true" locale="ja" :format=dateFormat time-picker-inline @open="setDefaultDate" />
         <!-- ラベルカラーの追加 -->
-        <div class="mt-6 mb-2">ラベルカラー</div>
+        <div class="my-2">ラベルカラー</div>
         <v-chip-group v-model="color" column>
           <v-chip v-for="color in colors" :key="color.name" :value="color.name" variant="outlined" label filter>
             <v-icon start icon="mdi-circle" :color="color.color"></v-icon>
