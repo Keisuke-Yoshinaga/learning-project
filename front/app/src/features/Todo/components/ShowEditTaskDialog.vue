@@ -103,7 +103,7 @@ const setDefaultDate = () => {
           </v-icon>
         </v-btn>
       </v-toolbar>
-      <v-card-subtitle v-if="parentTaskId != ''" class="text-right px-8">親タスク：{{ taskListStore.getTask(parentTaskId)?.title }}</v-card-subtitle>
+      <v-card-subtitle v-if="parentTaskId != ''" class="text-right px-8 mt-2">親タスク：{{ taskListStore.getTask(parentTaskId)?.title }}</v-card-subtitle>
       <v-card-text>
         <!-- タスク名 -->
         <v-text-field v-model="title" class="mb-1" label="タスク" clearable variant="outlined" :error-messages="errorMessage"></v-text-field>

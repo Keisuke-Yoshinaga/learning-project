@@ -1,10 +1,8 @@
 <template>
   <v-tabs v-model="tab">
+    <v-btn class="mr-auto ml-2" @click="saveMarkdown">SAVE</v-btn>
     <v-tab value="VIEW">VIEW</v-tab>
     <v-tab value="EDIT">EDIT</v-tab>
-    <v-btn class="ml-auto" @click="saveMarkdown">SAVE</v-btn>
-    <v-divider vertical class="mx-2"></v-divider>
-    <v-btn icon="mdi-dots-vertical" variant="plain" size="small" class="mr-2"></v-btn>
   </v-tabs>
   <v-window v-model="tab" :touch=false>
     <v-window-item value="VIEW">
@@ -27,6 +25,7 @@ import JP_JP from '@vavt/cm-extension/dist/locale/jp-JP';
 import { useMarkdownStore } from '@/features/Top/store/markdown'
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import { onBeforeRouteLeave } from 'vue-router';
 
 const markdownStore = useMarkdownStore();
 
@@ -85,6 +84,19 @@ const saveMarkdown = () => {
     dismissible: true,
   });
 }
+
+const isChanged = () => {
+  return markdownStore.getMarkdown != markdown.value;
+}
+
+onBeforeRouteLeave((to, from, next) => {
+  if (isChanged()) {
+    if (confirm("変更が保存されていません。保存しますか？")) {
+      saveMarkdown();
+    }
+  }
+  next();
+});
 
 </script>
 
