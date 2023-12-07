@@ -34,19 +34,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-          cache: 'yarn'
+          node-version: "20"
       - name: Install dependencies
-        run: yarn install
+        run: cd front/app && yarn install && yarn cache clean --force
       - name: Build
-        run: yarn build
+        run: cd front/app && yarn build --base=/${{ github.event.repository.name }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: './front/app/dist'
+          path: "./front/app/dist"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
