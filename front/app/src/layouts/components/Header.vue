@@ -26,16 +26,3 @@ export default {
   }),
 }
 </script>
-
-<style>
-@media screen and (max-width: 520px) {
-  #header {
-    display: none !important;
-  }
-
-  #nav {
-    height: 100% !important;
-    top: 0px !important;
-  }
-}
-</style>
