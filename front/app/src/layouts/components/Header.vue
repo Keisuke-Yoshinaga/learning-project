@@ -7,11 +7,15 @@
     <v-app-bar-title>
       技術学習
     </v-app-bar-title>
+
+    <HeaderMenu />
   </v-app-bar>
 
   <v-navigation-drawer id="nav" v-model="drawer">
     <v-list nav>
       <v-list-item prepend-icon="mdi-view-dashboard" title="TOP" value="top" :to="'/'">
+      </v-list-item>
+      <v-list-item prepend-icon="mdi-note-text" title="NOTE" value="note" :to="'/note'">
       </v-list-item>
       <v-list-item prepend-icon="mdi-format-list-checks" title="TODO" value="todo" :to="'/todo'">
       </v-list-item>
@@ -21,5 +25,8 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import HeaderMenu from '@/layouts/components/HeaderMenu.vue'
+
 const drawer = ref(false);
+
 </script>

@@ -8,7 +8,7 @@ export const useEditTaskDialogStore = defineStore("editTaskDialog", {
     parentTaskId: "",
   }),
   persist: {
-    storage: window.localStorage,
+    storage: window.sessionStorage,
     key: "editTaskDialog",
   },
   getters: {
