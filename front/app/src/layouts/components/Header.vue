@@ -19,10 +19,7 @@
   </v-navigation-drawer>
 </template>
 
-<script lang="ts">
-export default {
-  data: () => ({
-    drawer: false,
-  }),
-}
+<script lang="ts" setup>
+import { ref } from 'vue'
+const drawer = ref(false);
 </script>
