@@ -34,5 +34,7 @@ const clearData = () => {
   SessionStorageKeyList.forEach((key) => {
     sessionStorage.removeItem(key);
   });
+  // ページをリロード
+  location.reload();
 }
 </script>

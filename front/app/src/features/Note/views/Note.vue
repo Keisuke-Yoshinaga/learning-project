@@ -1,6 +1,7 @@
 <template>
   <v-tabs v-model="tab">
-    <v-btn class="mr-auto ml-2" @click="saveMarkdown">SAVE</v-btn>
+    <v-btn class="ml-2" @click="saveMarkdown">SAVE</v-btn>
+    <v-btn class="mr-auto ml-2" @click="downloadMarkdown">DOWNLOAD</v-btn>
     <v-tab value="VIEW">VIEW</v-tab>
     <v-tab value="EDIT">EDIT</v-tab>
   </v-tabs>
@@ -97,6 +98,26 @@ onBeforeRouteLeave((to, from, next) => {
   }
   next();
 });
+
+const downloadMarkdown = () => {
+  if (isChanged()) {
+    if (confirm("変更が保存されていません。保存後、再度実行してください。")) {
+      return;
+    }
+  } else {
+    if (confirm("ダウンロードしますか？")) {
+      const markdown = markdownStore.getMarkdown;
+      const blob = new Blob([markdown], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'markdown.md';
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    }
+  }
+}
 
 </script>
 
