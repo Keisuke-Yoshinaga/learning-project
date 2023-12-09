@@ -14,6 +14,17 @@ const routes = [
     ],
   },
   {
+    path: "/note",
+    component: () => import("@/layouts/Default.vue"),
+    children: [
+      {
+        path: "",
+        name: "Note",
+        component: () => import("@/features/Note/views/Note.vue"),
+      },
+    ],
+  },
+  {
     path: "/todo",
     component: () => import("@/layouts/FixScreen.vue"),
     children: [

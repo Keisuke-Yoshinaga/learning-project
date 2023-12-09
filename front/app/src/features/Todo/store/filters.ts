@@ -8,7 +8,7 @@ export const useFiltersStore = defineStore("filters", {
     overdue: null,
   }),
   persist: {
-    storage: window.localStorage,
+    storage: window.sessionStorage,
     key: "filters",
   },
   getters: {
