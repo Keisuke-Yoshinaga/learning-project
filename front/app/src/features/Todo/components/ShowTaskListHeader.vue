@@ -21,7 +21,7 @@ const colorFilters = computed({
     <!-- フィルターボタン -->
     <v-btn v-if="!colorFilters.length" class="ml-auto" density="compact" icon="mdi-filter-outline" variant="plain" @click="filterDialog = true"></v-btn>
     <v-btn v-else density="compact" icon="mdi-filter-check" variant="plain" @click="filterDialog = true"></v-btn>
-    <v-dialog v-model="filterDialog" width="80%">
+    <v-dialog v-model="filterDialog" width="80%" max-width="700px">
       <v-card class="mx-auto">
         <v-toolbar>
           <v-toolbar-title>Filter</v-toolbar-title>

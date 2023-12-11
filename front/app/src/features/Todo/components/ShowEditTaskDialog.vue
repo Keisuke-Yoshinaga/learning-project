@@ -89,7 +89,7 @@ const setDefaultDate = () => {
 </script>
 
 <template>
-  <v-dialog v-model="dialogStore.getIsOpen" persistent no-click-animation width="80%">
+  <v-dialog v-model="dialogStore.getIsOpen" persistent no-click-animation width="80%" max-width="700px">
     <v-card>
       <v-toolbar>
         <v-toolbar-title>
