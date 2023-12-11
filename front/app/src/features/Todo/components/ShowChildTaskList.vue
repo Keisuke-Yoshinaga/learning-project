@@ -9,7 +9,7 @@ const props = defineProps<{ taskId: string }>();
 </script>
 
 <template>
-  <v-list v-if="taskListStore.getChildTaskList(props.taskId).length" lines="two" class="bg-inherit ml-6">
+  <v-list v-if="taskListStore.getChildTaskList(props.taskId).length" lines="two" class="bg-inherit ml-6 py-0">
     <template v-for="childTask in taskListStore.getChildTaskList(props.taskId)" :key="childTask.id">
       <ShowTask :taskId="childTask.id" :childTask=true />
       <ShowChildTaskList :taskId="childTask.id" />
